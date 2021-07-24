@@ -32,30 +32,32 @@
 
 import SwiftUI
 
-struct ColorCircle: View {
-  let rgb: RGB
-  let size: CGFloat
-
-  var body: some View {
-    ZStack {
-      Circle()
-        .fill(Color.element)
-        .northWestShadow()
-      Circle()
-        .fill(Color(red: rgb.red, green: rgb.green, blue: rgb.blue))
-        .padding(20)
+struct BevelText: View {
+    let text: String
+    let width: CGFloat
+    let height: CGFloat
+    
+    var body: some View {
+        Text(text)
+            .frame(width: width, height: height)
+            .background(
+                ZStack {
+                    Capsule()
+                        .fill(Color.element)
+                        .northWestShadow(radius: 3, offset: 1)
+                    Capsule()
+                        .inset(by: 3)
+                        .fill(Color.element)
+                        .southEastShadow(radius: 1, offset: 1)
+                }
+            )
     }
-    .frame(width: size, height: size)
-  }
 }
 
-struct ColorCircle_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      Color.element
-      ColorCircle(rgb: RGB(), size: 200)
+struct BevelText_Previews: PreviewProvider {
+    static var previews: some View {
+        BevelText(text: "R: ??? G: ??? B: ???", width: 200, height: 48)
+            .frame(width: 300, height: 100)
+            .previewLayout(.sizeThatFits)
     }
-    .frame(width: 300, height: 300)
-    .previewLayout(.sizeThatFits)
-  }
 }

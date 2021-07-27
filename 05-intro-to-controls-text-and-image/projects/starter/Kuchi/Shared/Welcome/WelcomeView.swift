@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,48 @@
 
 import SwiftUI
 
-@main
-struct KuchiApp: App {
-  var body: some Scene {
-    WindowGroup {
-      WelcomeView()
+struct WelcomeView: View {
+  var body: some View {
+    ZStack {
+      Image("welcome-background")
+        .resizable()
+        .scaledToFit()
+        .aspectRatio(1 / 1, contentMode: .fill)
+        .edgesIgnoringSafeArea(.all)
+        .saturation(0.5)
+        .blur(radius: 5)
+        .opacity(0.08)
+      HStack {
+        Label {
+          VStack(alignment: .leading) {
+            Text("Welcome to")
+              .font(.headline)
+              .bold()
+            Text("Kuchi")
+              .font(.largeTitle)
+              .bold()
+          }
+          .foregroundColor(.red)
+          .lineLimit(2)
+          .multilineTextAlignment(.leading)
+          .padding(.horizontal)
+        } icon: {
+          Image(systemName: "table")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .cornerRadius(30 / 2)
+            .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+            .background(Color(white: 0.9))
+            .clipShape(Circle())
+            .foregroundColor(.red)
+        }
+        .labelStyle(HorizontallyAlignedLabelStyle())
+      }
     }
   }
 }
 
-struct KuchiApp_Previews: PreviewProvider {
+struct WelcomeView_Previews: PreviewProvider {
   static var previews: some View {
     WelcomeView()
   }

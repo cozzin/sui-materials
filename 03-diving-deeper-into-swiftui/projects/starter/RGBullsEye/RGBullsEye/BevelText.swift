@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,30 +32,39 @@
 
 import SwiftUI
 
-struct ColorCircle: View {
-  let rgb: RGB
-  let size: CGFloat
+struct BevelText: View {
+  let text: String
+  let width: CGFloat
+  let height: CGFloat
 
   var body: some View {
-    ZStack {
-      Circle()
-        .fill(Color.element)
-        .northWestShadow()
-      Circle()
-        .fill(Color(red: rgb.red, green: rgb.green, blue: rgb.blue))
-        .padding()
-    }
-    .frame(width: size, height: size)
+    Text(text)
+      .frame(width: width, height: height)
+      .background(
+        ZStack {
+          Capsule()
+            .fill(Color.element)
+            .northWestShadow(radius: 3, offset: 1)
+          Capsule()
+            .inset(by: 3)
+            .fill(Color.element)
+            .southEastShadow(radius: 1, offset: 1)
+        }
+      )
   }
 }
 
-struct ColorCircle_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      Color.element
-      ColorCircle(rgb: RGB(), size: 200)
+struct BevelText_Previews: PreviewProvider {
+    static var previews: some View {
+      ZStack {
+        Color.element
+        BevelText(
+          text: "Hello world",
+          width: 200,
+          height: 48
+        )
+      }
+      .frame(width: 300, height: 100)
+      .previewLayout(.sizeThatFits)
     }
-    .frame(width: 300, height: 300)
-    .previewLayout(.sizeThatFits)
-  }
 }

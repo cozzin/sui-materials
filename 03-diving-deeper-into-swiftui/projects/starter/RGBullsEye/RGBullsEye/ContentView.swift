@@ -108,7 +108,7 @@ struct ContentView_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
       ContentView(guess: RGB())
         .previewInterfaceOrientation(.portrait)
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.light)
         .previewDevice("iPhone 8")
     }
   }

@@ -59,16 +59,6 @@ struct ContentView: View {
           showScore = true
           game.check(guess: guess)
         }
-        .alert(isPresented: $showScore) {
-          Alert(
-            title: Text("Your Score"),
-            message: Text(String(game.scoreRound)),
-            dismissButton: .default(Text("OK")) {
-              game.startNewRound()
-              guess = RGB()
-            }
-          )
-        }
       }
   }
 }

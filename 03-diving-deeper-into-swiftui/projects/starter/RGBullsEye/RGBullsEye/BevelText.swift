@@ -51,6 +51,7 @@ struct BevelText: View {
             .southEastShadow(radius: 1, offset: 1)
         }
       )
+      .font(.body)
   }
 }
 
